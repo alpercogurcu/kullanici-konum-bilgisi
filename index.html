@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    window.addEventListener("load", function(){
+      
+    
+        if (navigator.geolocation)
+        {
+        navigator.geolocation.getCurrentPosition(showPosition,showError);
+        }
+    
+        function showPosition(position)
+      {
+    
+        // position.coords.longitude --> Boylam
+        //position.coords.latitude --> Enlem
+    
+        $.post("konumbilgileri.php",
+      {
+        enlem: position.coords.latitude,
+        boylam: position.coords.longitude
+      },
+      function(data, status){
+       // alert("Data: " + data + "\nStatus: " + status);
+      });
+    
+      
+      }
+
+     
+    function showError(error)
+      {
+      switch(error.code) 
+        {
+        case error.PERMISSION_DENIED:
+          x.innerHTML="Geolocation kullanıcı tarafından engellendi."
+          break;
+        case error.POSITION_UNAVAILABLE:
+          x.innerHTML="Konum bilgisi bulunamadı"
+          break;
+        case error.TIMEOUT:
+          x.innerHTML="İstek zaman aşımına uğradı."
+          break;
+        case error.UNKNOWN_ERROR:
+          x.innerHTML="Bilinmeyen bir hata oluştu."
+          break;
+        }
+      }
+    
+    
+    
+    });
+    </script>
+   
+</head>
+
+<body  onload="konumbilgial">
+
+  <a href="deneme.php">Konum bilgilerini gör</a>
+
+
+
+
+
+  <script>
+    function konumbilgial()
+    {
+      
+      if (navigator.geolocation)
+      {
+      navigator.geolocation.getCurrentPosition(showPosition,showError);
+      }
+  
+      function showPosition(position)
+    {
+  
+      // position.coords.longitude --> Boylam
+      //position.coords.latitude --> Enlem
+  
+      $.post("konumbilgileri.php",
+    {
+      enlem: position.coords.latitude,
+      boylam: position.coords.longitude
+    },
+    function(data, status){
+     // alert("Data: " + data + "\nStatus: " + status);
+    });
+  
+    
+    }
+
+   
+  function showError(error)
+    {
+    switch(error.code) 
+      {
+      case error.PERMISSION_DENIED:
+        x.innerHTML="Geolocation kullanıcı tarafından engellendi."
+        break;
+      case error.POSITION_UNAVAILABLE:
+        x.innerHTML="Konum bilgisi bulunamadı"
+        break;
+      case error.TIMEOUT:
+        x.innerHTML="İstek zaman aşımına uğradı."
+        break;
+      case error.UNKNOWN_ERROR:
+        x.innerHTML="Bilinmeyen bir hata oluştu."
+        break;
+      }
+    }
+    }
+  </script>
+
+
+</body>
+</html>
